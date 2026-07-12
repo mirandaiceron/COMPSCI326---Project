@@ -1,4 +1,5 @@
 # Project Name
+Campus Resource Finder
 
 ## Team Roster
 | Name | GitHub Username |
@@ -14,3 +15,4 @@ Miranda Ceron | @mirandaiceron
 - If any disagreements arise, we will discuss all possible different approaches team members may have and work toward a consensus. If no agreement is reached, we will take a majority vote and respect each other and the team's decision. 
 
 ## Project Domain
+Our project is a Campus Resource Finder that helps college students quickly locate useful campus services such as tutoring, counseling, food assistance, study spaces, and career resources. Many students are unaware of these resources or have difficulty finding them. Our goal is to provide a simple website that makes important campus services easier to discover. This project supports student success and aligns with the idea of Computing for the Common Good.
