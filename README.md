@@ -3,7 +3,7 @@
 ## Team Roster
 | Name | GitHub Username |
 | ------ | ----------------- |
-Nguyen Pham | @
+Nguyen Pham | @GiaPham204
 Miranda Ceron | @mirandaiceron
 
 ## Working Agreement
