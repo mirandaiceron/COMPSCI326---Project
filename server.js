@@ -1,10 +1,18 @@
 //imports Express library installed
 import express from "express";
+import resourcesRouter from "./routes/resourcesRoutes.js";
 
 //creates Express server
 const app = express();
 //server listens on port 3000
 const PORT = 3000;
+
+app.set("view engine", "ejs");
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static("public"));
+
+// Use resources router
+app.use("/resources", resourcesRouter);
 
 //define GET route for home page (/)
 app.get("/", (req, res) => {
@@ -15,26 +23,11 @@ app.get("/", (req, res) => {
         `);
 });
 
-//define GET route for /resources
-app.get("/resources", (req, res) => {
-  //send an HTML page containing a list of campus resources
-  res.send(`
-        <h1>Campus Resources</h1>
-        <ul>
-            <li>Tutoring</li>
-            <li>Counseling</li>
-            <li>Food Assistance</li>
-            <li>Study Spaces</li>
-            <li>Career Services</li>
-        </ul>
-        `);
-});
-
 app.get("/about", (req, res) => {
   res.send(`
         <h1>About Campus Resource Finder</h1>
         <p>
-        Campus Resource Finder helps student quickly locate important campus services such as tutoring, counseling, food assistance, study spaces, and career resources.
+        Campus Resource Finder helps students quickly locate important campus services such as tutoring, counseling, food assistance, study spaces, and career resources.
         </p>
         `);
 });
