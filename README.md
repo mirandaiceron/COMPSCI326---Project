@@ -54,3 +54,83 @@ node server.js
 - Home page: http://localhost:3000/
 - Resources page: http://localhost:3000/resources
 - About page: http://localhost:3000/about
+
+## New Feature
+
+### Add Resource
+
+Sprint 2 introduces the ability for users to add new campus resources through the web application.
+
+Users can:
+- View all available campus resources.
+- Submit a new resource using th form.
+- Have the resource saved to application's JSON file.
+- See the updated list immediately after submitting the form. 
+
+### How to Use
+1. Start the server.
+
+```bash
+node server.js
+```
+
+2. Open your browser and visit:
+
+```
+http://localhost:3000/resources
+```
+
+3. Fill our the Add Resource form with:
+- Resource Name
+- Category
+- Location
+- Description
+
+4. Click **Add Resource**.
+
+5. The page reloads and displays the newly added resoure. The resource is also saved to `data/resources.json`.
+
+If any required field is left blank, the application displays an error message and does not save the resource.
+
+## System Diagram 
+
+```
+Browser
+
+Routes (resources.Routes.js)
+
+Controller (resourcesController.js)
+
+Service (resourcesService.js)
+
+Repository (resourcesRepository.js)
+
+resources.json
+```
+
+## Testing the Feature
+
+The feature was tested using the following steps:
+
+1. Start the server:
+```bash
+node server.js
+```
+
+2. Open:
+```
+http://localhost:3000/resources
+```
+
+3. Submit a valid resource through the form.
+
+Expected result:
+- The resource appears in the list.
+- The resource is saved to `data/resources.json`.
+- A new unique ID is assigned automatically.
+
+4. Submit the form with a required field left blank.
+
+Expected result:
+- The application displays **"Fill out this field."** for said blank field. 
+- No resource is added to the JSON file. 
