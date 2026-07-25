@@ -1,0 +1,37 @@
+[
+  {
+    "id": 1,
+    "name": "Learning Resource Center",
+    "category": "Tutoring",
+    "location": "W.E.B. Du Bois Library",
+    "description": "Free tutoring and academic support."
+  },
+  {
+    "id": 2,
+    "name": "Center for Counseling and Psychological Health",
+    "category": "Counseling",
+    "location": "Student Union",
+    "description": "Mental health and wellness services."
+  },
+  {
+    "id": 3,
+    "name": "Campus Food Pantry",
+    "category": "Food Assistance",
+    "location": "Student Union",
+    "description": "Provides free groceries and food assistance for students."
+  },
+  {
+    "id": 4,
+    "name": "Career Development & Professional Connections",
+    "category": "Career Services",
+    "location": "Goodell Hall",
+    "description": "Career advising, internships, and job search support."
+  },
+  {
+    "id": 5,
+    "name": "Learning Commons",
+    "category": "Study Spaces",
+    "location": "W.E.B. Du Bois Library",
+    "description": "Offers quiet and collaborative study spaces for students."
+  }
+]

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Campus Resources</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+
+  <body>
+    <h1>Campus Resources</h1>
+    <% if (error) { %>
+    <p><%= error %></p>
+  <% } %>
+
+  <h2>Available Resources</h2>
+
+  <ul>
+    <% resources.forEach((resource) => { %>
+<li>
+  <h3><%= resource.name %></h3>
+  <p><strong>Category:</strong> <%= resource.category %></p>
+  <p><strong>Location:</strong> <%= resource.location %></p>
+  <p><%= resource.description %></p>
+</li>
+ <% }); %>
+  </ul>
+
+  <h2>Add a Resource</h2>
+  <form action="/resources" method="POST">
+    <div>
+      <label for="name">Resource name:</label>
+      <input id="name" name="name" type="text" required />
+    </div>
+
+    <div>
+      <label for="category">Category:</label>
+      <input id="category" name="category" type="text" required />
+    </div>
+
+    <div>
+      <label for="location">Location:</label>
+      <input id="location" name="location" type="text" required />
+    </div>
+
+    <div>
+      <label for="description">Description:</label>
+      <textarea
+      id="description"
+      name="description"
+      required
+      ></textarea>
+    </div>
+
+    <button type="submit">Add Resource</button>
+  </form>
+  </body>
+</html>
