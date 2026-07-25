@@ -96,15 +96,20 @@ If any required field is left blank, the application displays an error message a
 
 ```
 Browser
-
-Routes (resources.Routes.js)
-
+    |
+    v
+Routes (resourcesRoutes.js)
+    |
+    v
 Controller (resourcesController.js)
-
+    |
+    v
 Service (resourcesService.js)
-
+    |
+    v
 Repository (resourcesRepository.js)
-
+    |
+    v
 resources.json
 ```
 
