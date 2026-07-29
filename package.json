@@ -4,7 +4,8 @@
   "description": "| Name | GitHub Username | | ------ | ----------------- | Nguyen Pham | @ Miranda Ceron | @mirandaiceron",
   "main": "index.js",
   "scripts": {
-    "test": "node --experimental-vm-modules ./node_modules/jest/bin/jest.js"
+    "test": "node --experimental-vm-modules ./node_modules/jest/bin/jest.js",
+    "build:css": "tailwindcss -i ./src/input.css -o ./public/style.css"
   },
   "keywords": [],
   "author": "",
@@ -15,6 +16,8 @@
     "express": "^5.2.1"
   },
   "devDependencies": {
-    "jest": "^30.4.2"
+    "@tailwindcss/cli": "^4.3.3",
+    "jest": "^30.4.2",
+    "tailwindcss": "^4.3.3"
   }
 }
