@@ -63,7 +63,7 @@ Sprint 2 introduces the ability for users to add new campus resources through th
 
 Users can:
 - View all available campus resources.
-- Submit a new resource using th form.
+- Submit a new resource using the form.
 - Have the resource saved to application's JSON file.
 - See the updated list immediately after submitting the form. 
 
@@ -80,7 +80,7 @@ node server.js
 http://localhost:3000/resources
 ```
 
-3. Fill our the Add Resource form with:
+3. Fill out  the Add Resource form with:
 - Resource Name
 - Category
 - Location
@@ -88,7 +88,7 @@ http://localhost:3000/resources
 
 4. Click **Add Resource**.
 
-5. The page reloads and displays the newly added resoure. The resource is also saved to `data/resources.json`.
+5. The page reloads and displays the newly added resource. The resource is also saved to `data/resources.json`.
 
 If any required field is left blank, the application displays an error message and does not save the resource.
 
@@ -98,7 +98,7 @@ If any required field is left blank, the application displays an error message a
 Browser
     |
     v
-Routes (resourcesRoutes.js)
+Route (resourcesRoutes.js)
     |
     v
 Controller (resourcesController.js)
@@ -111,6 +111,21 @@ Repository (resourcesRepository.js)
     |
     v
 resources.json
+    ^
+    |
+Repository
+    ^
+    |
+Service
+    ^
+    |
+Controller
+    ^
+    |
+Render resources.ejs
+    |
+    V
+Browser
 ```
 
 ## Testing the Feature
@@ -137,5 +152,12 @@ Expected result:
 4. Submit the form with a required field left blank.
 
 Expected result:
-- The application displays **"Fill out this field."** for said blank field. 
+- The browser's built-in `required` attribute prevents the form from being submitted and displays **"Fill out this field."** 
 - No resource is added to the JSON file. 
+
+5. Submit an invalid request that bypasses the browser's validation (ex. request with missing field(s))
+
+Expected result:
+- The server responds with a **400 Bad Request** status.
+- The application displays **"All fields are required."**
+- No resource is added to the JSON file.
