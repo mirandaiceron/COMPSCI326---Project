@@ -59,15 +59,17 @@ node server.js
 
 ### Add Resource
 
-Sprint 2 introduces the ability for users to add new campus resources through the web application.
+Sprint 3 enhances the Add Resource feature by replacing the JSON file with MongoDB, adding HTMX for instant page updates, and improving the interface with Tailwind CSS.
 
 Users can:
-- View all available campus resources.
-- Submit a new resource using the form.
-- Have the resource saved to application's JSON file.
-- See the updated list immediately after submitting the form. 
+
+- View all available campus resources stored in MongoDB.
+- Submit a new resource without reloading the page using HTMX.
+- Have the resource saved to MongoDB.
+- See the updated list immediately after submitting the form.
 
 ### How to Use
+
 1. Start the server.
 
 ```bash
@@ -80,7 +82,8 @@ node server.js
 http://localhost:3000/resources
 ```
 
-3. Fill out  the Add Resource form with:
+3. Fill out the Add Resource form with:
+
 - Resource Name
 - Category
 - Location
@@ -88,11 +91,11 @@ http://localhost:3000/resources
 
 4. Click **Add Resource**.
 
-5. The page reloads and displays the newly added resource. The resource is also saved to `data/resources.json`.
+5. The new resource appears immediately without loading the page, and the resource is saved to MongoDB.
 
-If any required field is left blank, the application displays an error message and does not save the resource.
+If any required field is left blank, the browser prevents the form from being submitted. If invalid data is sent to the server, an error message is displayed and the resource is not saved.
 
-## System Diagram 
+## System Diagram
 
 ```
 Browser
@@ -110,7 +113,7 @@ Service (resourcesService.js)
 Repository (resourcesRepository.js)
     |
     v
-resources.json
+MongoDB
     ^
     |
 Repository
@@ -133,11 +136,13 @@ Browser
 The feature was tested using the following steps:
 
 1. Start the server:
+
 ```bash
 node server.js
 ```
 
 2. Open:
+
 ```
 http://localhost:3000/resources
 ```
@@ -145,19 +150,35 @@ http://localhost:3000/resources
 3. Submit a valid resource through the form.
 
 Expected result:
-- The resource appears in the list.
-- The resource is saved to `data/resources.json`.
-- A new unique ID is assigned automatically.
+
+- The resource appears in the list immediately without reloading the page.
+- The resource is saved to `MongoDB`.
+- A `MongoDB ObjectId` is assigned automatically.
 
 4. Submit the form with a required field left blank.
 
 Expected result:
-- The browser's built-in `required` attribute prevents the form from being submitted and displays **"Fill out this field."** 
-- No resource is added to the JSON file. 
+
+- The browser's built-in `required` attribute prevents the form from being submitted and displays **"Fill out this field."**
+- No resource is saved to `MongoDB`.
 
 5. Submit an invalid request that bypasses the browser's validation (ex. request with missing field(s))
 
 Expected result:
+
 - The server responds with a **400 Bad Request** status.
 - The application displays **"All fields are required."**
-- No resource is added to the JSON file.
+- No resource is saved to `MongoDB`.
+
+## Running Tests:
+
+Run the test suite:
+
+```bash
+npm test
+```
+
+Expected result:
+
+- All Jest tests pass.
+- The service-layer validation rules are verified using a mocked repository.

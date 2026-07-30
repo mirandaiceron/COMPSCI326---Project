@@ -1,11 +1,18 @@
 //imports Express library installed
 import express from "express";
+import mongoose from "mongoose";
 import resourcesRouter from "./routes/resourcesRoutes.js";
 
 //creates Express server
 const app = express();
 //server listens on port 3000
 const PORT = 3000;
+
+const MONGODB_URI =
+  process.env.MONGODB_URI ||
+  "mongodb://dev:devpassword@mongo:27017/devdb?authSource=admin";
+
+await mongoose.connect(MONGODB_URI);
 
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: true }));

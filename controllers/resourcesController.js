@@ -11,12 +11,16 @@ export async function showResources(req, res) {
 
 export async function addResource(req, res) {
   try {
-    await createResource(req.body);
-    res.redirect("/resources");
+    const resource = await createResource(req.body);
+    if (req.get("HX-Request")) {
+      return res.render("partials/resourceItem", {
+        resource,
+      });
+    }
+    return res.redirect("/resources");
   } catch (error) {
     const resources = await listResources();
-
-    res.status(400).render("resources", {
+    return res.status(400).render("resources", {
       resources,
       error: error.message,
     });

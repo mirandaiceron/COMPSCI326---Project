@@ -13,7 +13,8 @@
   "type": "module",
   "dependencies": {
     "ejs": "^6.0.1",
-    "express": "^5.2.1"
+    "express": "^5.2.1",
+    "mongoose": "^9.8.1"
   },
   "devDependencies": {
     "@tailwindcss/cli": "^4.3.3",
