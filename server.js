@@ -44,3 +44,9 @@ app.listen(PORT, () => {
   //prints message in the terminal
   console.log(`Server running at http://localhost:${PORT}`);
 });
+
+app.get("/health", (req, res) => {
+  res.json({
+    status: "ok",
+  });
+});
