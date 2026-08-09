@@ -19,7 +19,12 @@ export async function addResource(req, res) {
     }
     return res.redirect("/resources");
   } catch (error) {
+    if (req.get("HX-Request")) {
+      return res.status(400).send(error.message);
+    }
+
     const resources = await listResources();
+
     return res.status(400).render("resources", {
       resources,
       error: error.message,
