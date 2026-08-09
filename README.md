@@ -57,16 +57,18 @@ node server.js
 
 ## New Feature
 
-### Add Resource
+### User Authentication and Resource Authorization
 
-Sprint 3 enhances the Add Resource feature by replacing the JSON file with MongoDB, adding HTMX for instant page updates, and improving the interface with Tailwind CSS.
+Sprint 4 adds user authentication using session-based login and authorization for managing resources.
 
 Users can:
 
-- View all available campus resources stored in MongoDB.
-- Submit a new resource without reloading the page using HTMX.
-- Have the resource saved to MongoDB.
-- See the updated list immediately after submitting the form.
+- Sign up for a new account.
+- Log in and create a session.
+- Create resources associated with their account.
+- Delete only resources that they own.
+- Stay logged in using cookies and server-side sessions.
+- Access protected routes only after logging in.
 
 ### How to Use
 
@@ -82,18 +84,28 @@ node server.js
 http://localhost:3000/resources
 ```
 
-3. Fill out the Add Resource form with:
+3. Create a new account by signing up.
+
+4. Log in with your account.
+
+5. Navigate to the Resources page.
+
+6. Add a new resource by filling out:
 
 - Resource Name
 - Category
 - Location
 - Description
 
-4. Click **Add Resource**.
+7. Click **Add Resource**.
 
-5. The new resource appears immediately without loading the page, and the resource is saved to MongoDB.
+8. Your new resource appears immediately without reloading the page and is saved to MongoDB.
 
-If any required field is left blank, the browser prevents the form from being submitted. If invalid data is sent to the server, an error message is displayed and the resource is not saved.
+9. Resources that you own display a **Delete** button. Click **Delete** to remove your own resource.
+
+10. Resources created by other users cannot be deleted. If a delete request is made for another user's resource, the server returns **403 Forbidden**.
+
+If any required field is left blank, the browser prevents the form from being submitted. Invalid data is rejected by the server, and protected actions require the user to be logged in.
 
 ## System Diagram
 
@@ -101,28 +113,37 @@ If any required field is left blank, the browser prevents the form from being su
 Browser
     |
     v
-Route (resourcesRoutes.js)
+Session Cookie
     |
     v
-Controller (resourcesController.js)
+attachUser.js
     |
     v
-Service (resourcesService.js)
+resourcesRoutes.js
     |
     v
-Repository (resourcesRepository.js)
+requireLogin.js
+    |
+    v
+resourcesController.js
+    |
+    v
+resourcesService.js
+    |
+    v
+resourcesRepository.js
     |
     v
 MongoDB
     ^
     |
-Repository
+resourcesRepository.js
     ^
     |
-Service
+resourcesService.js
     ^
     |
-Controller
+resourcesController.js
     ^
     |
 Render resources.ejs
@@ -147,7 +168,7 @@ node server.js
 http://localhost:3000/resources
 ```
 
-3. Submit a valid resource through the form.
+3. Log in with a valid account and submit a valid resource.
 
 Expected result:
 
@@ -155,19 +176,18 @@ Expected result:
 - The resource is saved to `MongoDB`.
 - A `MongoDB ObjectId` is assigned automatically.
 
-4. Submit the form with a required field left blank.
+4. Delete a resource that you own.
 
 Expected result:
 
-- The browser's built-in `required` attribute prevents the form from being submitted and displays **"Fill out this field."**
-- No resource is saved to `MongoDB`.
+- The resource is removed from the page and deleted from MongoDB.
+- Attempting to delete another user's resource returns **403 Forbidden**.
 
-5. Submit an invalid request that bypasses the browser's validation (ex. request with missing field(s))
+5. Submit the form with a required field left blank.
 
 Expected result:
 
-- The server responds with a **400 Bad Request** status.
-- The application displays **"All fields are required."**
+- The browser's built-in `required` attribute prevents the form from being submitted.
 - No resource is saved to `MongoDB`.
 
 ## Running Tests:
