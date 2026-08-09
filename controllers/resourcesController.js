@@ -1,4 +1,8 @@
-import { listResources, createResource } from "../services/resourcesService.js";
+import {
+  listResources,
+  createResource,
+  deleteResource,
+} from "../services/resourcesService.js";
 
 export async function showResources(req, res) {
   const resources = await listResources();
@@ -11,7 +15,7 @@ export async function showResources(req, res) {
 
 export async function addResource(req, res) {
   try {
-    const resource = await createResource(req.body);
+    const resource = await createResource(req.body, req.user);
     if (req.get("HX-Request")) {
       return res.render("partials/resourceItem", {
         resource,
@@ -27,6 +31,19 @@ export async function addResource(req, res) {
 
     return res.status(400).render("resources", {
       resources,
+      error: error.message,
+    });
+  }
+}
+
+export async function removeResource(req, res) {
+  try {
+    await deleteResource(req.params.id, req.user);
+    return res.status(200).json({
+      deleted: true,
+    });
+  } catch (error) {
+    return res.status(error.status || 500).json({
       error: error.message,
     });
   }
