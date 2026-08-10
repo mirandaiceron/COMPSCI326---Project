@@ -22,6 +22,11 @@ const resourceSchema = new mongoose.Schema(
       required: true,
       trim: true,
     },
+    ownerId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
   },
   {
     timestamps: true,
@@ -38,4 +43,12 @@ export async function getAllResources() {
 export async function addResource(resource) {
   const newResource = await Resource.create(resource);
   return newResource.toObject();
+}
+
+export async function findResourceById(id) {
+  return Resource.findById(id).lean();
+}
+
+export async function removeResourceById(id) {
+  return Resource.findByIdAndDelete(id).lean();
 }
