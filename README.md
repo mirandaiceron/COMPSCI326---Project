@@ -65,6 +65,7 @@ Users can:
 
 - Sign up for a new account.
 - Log in and create a session.
+- Log out and end their session. 
 - Create resources associated with their account.
 - Delete only resources that they own.
 - Stay logged in using cookies and server-side sessions.
@@ -153,6 +154,58 @@ Browser
 ```
 
 ## Testing the Feature
+
+### Authentication
+- Create a new account.
+- Log in using valid credentials.
+- Log out successfully.
+
+Expected result:
+- Session created after login.
+- Logging out destroys session.
+
+### Authorization
+- Log in with a valid account.
+- Create a new resource.
+- Delete a resource that you own. 
+
+Expected result:
+- The resource is removed from the page and deleted from MongoDB.
+- Attempt to delete another user's resource.
+
+Expected result: 
+- The server returns **403 Forbidden**.
+
+### Validation 
+Submit the form with a required field left blank.
+
+Expected result:
+- The browser's built-in `required` validation prevents submission.
+- Invalid data is rejected by the server.
+- No resource is saved to MongoDB.
+
+### Health Check
+
+Visit:
+```
+http://localhost:3000/health
+```
+
+Expected result:
+
+```json
+{
+    "status": "ok"
+}
+```
+## Accessibility
+
+The application was reviewed based on Unit 16.
+
+- Every form input has associated `<label>`.
+- Interface can be navigated using the keyboard.
+- Tailwind color combinations have sufficient contrast for readability.
+- HTMX interactions preserve user interaction after dynamic updates. 
 
 The feature was tested using the following steps:
 
