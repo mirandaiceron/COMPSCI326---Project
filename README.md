@@ -43,13 +43,17 @@ cd COMPSCI326---Project
 npm install
 ```
 
-### 4. Start the server
+### 4. Start MongoDB
+
+Before starting the application, make sure MongoDB is running (by starting the course dev container or your local MongoDB server). The application connects using the `MONGODB_URI` environment variable. (If no environment variable is provided, it uses the default development connection in `server.js`).
+
+### 5. Start the server
 
 ```bash
 node server.js
 ```
 
-### 5. Open the application
+### 6. Open the application
 
 - Home page: http://localhost:3000/
 - Resources page: http://localhost:3000/resources
@@ -205,7 +209,7 @@ The application was reviewed based on Unit 16.
 - Every form input has associated `<label>`.
 - Interface can be navigated using the keyboard.
 - Tailwind color combinations have sufficient contrast for readability.
-- HTMX interactions preserve user interaction after dynamic updates. 
+- HTMX interactions preserve user interaction after dynamic updates and return keyboard focus to the resource list. 
 
 The feature was tested using the following steps:
 
@@ -244,6 +248,8 @@ Expected result:
 - No resource is saved to `MongoDB`.
 
 ## Running Tests:
+
+Make sure MongoDB is running before executing the tests. 
 
 Run the test suite:
 

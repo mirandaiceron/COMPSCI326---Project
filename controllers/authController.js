@@ -1,16 +1,22 @@
 import * as authService from "../services/authService.js";
 import { createSession, destroySession } from "../sessions.js";
 
+export function showLogin(req, res) {
+  res.render("login");
+}
+
+export function showSignup(req, res) {
+  res.render("signup");
+}
+
 //Handles user signup req
 export async function signup(req, res) {
   try {
-    const user = await authService.signup(req.body);
-    res.status(201).json(user);
+    await authService.signup(req.body);
+    res.redirect("/login");
   } catch (error) {
-    res.status(400).json({
-      error: error.message,
-    });
-  }
+      res.status(400).send(error.message);
+    };
 }
 
 //Handles user login req
@@ -25,16 +31,12 @@ export async function login(req, res) {
       httpOnly: true,
     });
 
-    res.status(200).json({
-      loggedIn: true,
-      user,
-    });
+    res.redirect("/resources");
+    
   } catch (error) {
-    res.status(401).json({
-      error: error.message,
-    });
+    res.status(401).send(error.message);
+    };
   }
-}
 
 export function logout(req, res) {
   const sessionId = req.signedCookies.sessionId;
@@ -43,7 +45,6 @@ export function logout(req, res) {
   }
 
   res.clearCookie("sessionId");
-  res.status(200).json({
-    loggedOut: true,
-  });
-}
+  res.redirect("/login");
+  };
+

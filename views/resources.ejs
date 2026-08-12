@@ -9,6 +9,18 @@
   </head>
 
   <body class ="max-w-4xl mx-auto p-4 sm:p-6 lg:p-8">
+
+    <p class="mb-4">
+      <a href="/login">Log In</a>
+      <a href="/signup">Sign Up</a>
+    </p>
+
+    <form action="/logout" method="POST">
+      <button type="submit">
+        Log Out
+      </button>
+    </form>
+
     <h1 class="text-3xl font-bold border-b-2 border-gray-300 pb-2 mb-6">Campus Resources</h1>
     <% if (error) { %>
     <p class="mb-4 rounded border border-red-300 bg-red-100 p-3 text-red-700"><%= error %></p>
@@ -18,7 +30,7 @@
 
    <p id="status-announcer" class="sr-only" aria-live="polite"></p>
 
-  <ul id="resources-list" tabindex="-1">
+  <ul id="resources-list" tabindex="-1" class="space-y-4 mb-8 md:grid md:grid-cols-2 md:gap-4 md:space-y-0">
     <% resources.forEach((resource) => { %>
     <%- include("partials/resourceItem", {resource}) %>
     <% }); %>
@@ -35,7 +47,7 @@
     class="flex flex-col gap-2 mb-6 md:grid md:grid-cols-2"
   >
     <div>
-      <label for="name">Resource name:</label>
+      <label for="name">Resource Name:</label>
       <input id="name" name="name" type="text" required class="border border-gray-300 rounded p-2"/>
     </div>
 
