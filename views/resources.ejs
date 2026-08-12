@@ -16,7 +16,9 @@
 
   <h2 class="mb-4 text-2xl font-semibold">Available Resources</h2>
 
-  <ul id="resources-list" class="space-y-4 mb-8 md:grid md:grid-cols-2 md:gap-4 md:space-y-0">
+   <p id="status-announcer" class="sr-only" aria-live="polite"></p>
+
+  <ul id="resources-list" tabindex="-1">
     <% resources.forEach((resource) => { %>
     <%- include("partials/resourceItem", {resource}) %>
     <% }); %>
@@ -59,5 +61,8 @@
 
     <button type="submit" class="bg-teal-700 text-white rounded px-4 py-2 md:col-span-2">Add Resource</button>
   </form>
+
+  <script src="/app.js"></script>
+
   </body>
 </html>
