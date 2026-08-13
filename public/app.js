@@ -6,4 +6,3 @@ list.addEventListener("htmx:beforeSwap", () => {
     list.focus();
 });
 
-<script src="/app.js" defer></script>
